@@ -1,10 +1,10 @@
 import './index.css';
-import { PrimaryButton } from '@UI/buttons';
+import { Button } from '@UI/buttons';
 
 function App() {
   return (
     <div className="App">
-      <PrimaryButton>siema</PrimaryButton>
+      <Button> siema</Button>
     </div>
   );
 }
