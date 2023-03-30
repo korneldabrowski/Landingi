@@ -13,12 +13,14 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.13",
+    "@heroicons/react": "^2.0.16",
     "clsx": "^1.2.1",
     "daisyui": "^2.51.5",
     "eslint": "^8.36.0",
     "eslint-config-react-app": "^7.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "recharts": "^2.5.0",
     "tailwind-merge": "^1.10.0",
     "vite-plugin-eslint": "^1.8.1"
   },
