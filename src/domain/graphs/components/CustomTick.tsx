@@ -1,4 +1,4 @@
-export function CustomTick(props) {
+export function CustomTick(props: any) {
   const { x, y, payload } = props;
   const words = payload.value.split(' ');
   const maxCharsPerLine = 10;
