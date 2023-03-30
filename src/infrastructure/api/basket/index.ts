@@ -6,6 +6,6 @@ export type {
   RequestOptions,
   ApiResponse,
   Product,
-  Cart,
+  Cart as CartType,
   CartListResponse,
 } from './basket.types';

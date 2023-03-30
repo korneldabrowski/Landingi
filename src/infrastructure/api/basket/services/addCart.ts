@@ -5,11 +5,11 @@ const API_URL = 'https://dummyjson.com';
 
 async function addToCart(cart: Cart): Promise<Cart> {
   try {
-    const response = await apiRequest<Cart>(API_URL, `/carts/add`, {
+    const response = await apiRequest<Cart>(API_URL, '/carts/add', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-
-      data: JSON.stringify(cart),
+      queryParams: {},
+      data: cart,
     });
 
     return response.data;
