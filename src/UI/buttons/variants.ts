@@ -6,6 +6,7 @@ export const colorVariants = {
   info: 'btn-info',
   error: 'btn-error',
   accent: 'btn-accent',
+  none: 'bg-transparent outline-0 border-0',
 };
 
 export const sizeVariants = {

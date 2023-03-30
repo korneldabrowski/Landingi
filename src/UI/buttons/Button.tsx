@@ -20,8 +20,7 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <button
       className={twMerger(
-        'btn normal-case ',
-        className,
+        'btn normal-case  ',
         color && colorVariants[color],
         size && sizeVariants[size],
         outline && 'btn-outline',
@@ -30,7 +29,8 @@ const Button: React.FC<ButtonProps> = ({
         disabled && 'disabled',
         loading && 'loading',
         ghost && 'btn-ghost',
-        link && 'btn-link '
+        link && 'btn-link ',
+        className
       )}
       onClick={onClick}
     >

@@ -9,7 +9,8 @@ export type ButtonProps = {
     | 'warning'
     | 'info'
     | 'error'
-    | 'accent';
+    | 'accent'
+    | 'none';
   outline?: boolean;
   glass?: boolean;
   size?: 'xsmall' | 'small' | 'medium' | 'large' | 'wide';
