@@ -6,6 +6,8 @@ import DoubleLineGraph from './components/DoubleLineGraph';
 export function Controller() {
   const cart = useCart();
 
+  if (!cart.products) return null;
+
   const data = cart.products.map((product) => {
     return {
       name: product.title,
