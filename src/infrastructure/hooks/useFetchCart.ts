@@ -2,26 +2,27 @@ import { useEffect, useState } from 'react';
 import {
   getAllCarts,
   deleteCart,
-  addToCart,
   getCartById,
-  Cart,
-  CartListResponse,
+  CartType,
 } from '@infrastructure/api/basket';
+
+// type CartOrListResponse = CartListResponse | Cart;
 
 export default function useFetch({
   type,
   id,
   cart,
+  callback,
 }: {
-  type: 'getAllCarts' | 'deleteCart' | 'viewCart' | 'addCart';
+  type: 'getAllCarts' | 'deleteCart' | 'viewCart';
   id?: number;
-  cart?: Cart;
+  cart?: CartType;
+  callback?: (_data: any) => void;
 }) {
-  const [data, setData] = useState<Cart | null | CartListResponse | Response>(
-    null
-  );
-  const [error, setError] = useState<unknown | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState<CartType[] | null | CartType>(null);
+
+  const [error, setError] = useState<Error | null>(null);
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     (async function () {
@@ -31,21 +32,24 @@ export default function useFetch({
         switch (type) {
           case 'getAllCarts':
             const response = await getAllCarts({ limit: 10 });
-            setData(response);
+            setData(response.carts);
             break;
           case 'deleteCart':
-            if (!id) throw new Error('ID is required for deleteCart');
+            if (!id) {
+              const errorMsg = 'ID is required for deleteCart';
+              setError(new Error(errorMsg));
+              throw new Error(errorMsg);
+            }
             const deletedCart = await deleteCart(id);
             setData(deletedCart);
             break;
-          case 'addCart':
-            if (!id) throw new Error('ID is required for addCart');
-            if (!cart) throw new Error('Cart is required for addCart');
-            const addCart = await addToCart(cart);
-            setData(addCart);
-            break;
           case 'viewCart':
-            if (!id) throw new Error('ID is required for viewCart');
+            if (!id) {
+              const errorMsg = 'ID is required for viewCart';
+              setError(new Error(errorMsg));
+              throw new Error(errorMsg);
+            }
+
             const viewedCart = await getCartById(id);
             setData(viewedCart);
             break;
@@ -53,17 +57,18 @@ export default function useFetch({
             throw new Error('Invalid fetch type specified');
         }
       } catch (error: unknown) {
-        setError(error);
         if (error instanceof Error) {
+          setError(error);
           throw new Error(`Failed to retrieve data. ${error.message}`);
         } else {
-          throw new Error(`Failed to retrieve data. Unknown error`);
+          setError(new Error('Unknown error occurred'));
+          throw new Error('Failed to retrieve data. Unknown error');
         }
       } finally {
         setLoading(false);
       }
     })();
-  }, [type, id, cart]);
+  }, [type, id, cart, callback]);
 
-  return { data, error, loading };
+  return { data, error, isLoading };
 }
