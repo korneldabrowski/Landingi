@@ -17,7 +17,8 @@
     "jsx": "react-jsx",
     "baseUrl": "./src",
     "paths": {
-      "@UI/*": ["UI/*"]
+      "@UI/*": ["UI/*"],
+      "@utils/*": ["utils/*"]
     }
   },
   "include": ["src"],
