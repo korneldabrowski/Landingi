@@ -2,7 +2,7 @@ import { useCart } from 'infrastructure/context/CartContext';
 
 import { CustomTick } from './components/CustomTick';
 import DoubleLineGraph from './components/DoubleLineGraph';
-import countDiscount from './service/countDiscount.service';
+import countDiscount from './service/countDiscount';
 
 export function Controller() {
   const cart = useCart();
